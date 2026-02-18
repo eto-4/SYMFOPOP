@@ -29,6 +29,9 @@ class Product
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $image = null;
+
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
@@ -104,6 +107,18 @@ class Product
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+        
+        return $this;
+    } 
+
     public function getOwner(): ?User
     {
         return $this->owner;
@@ -114,17 +129,6 @@ class Product
         $this->owner = $owner;
 
         return $this;
-    }
-
-    #[ORM\PrePersist]
-    public function prePersist(): void {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
-    }
-    
-    #[ORM\PreUpdate]
-    public function preUpdate(): void {
-        $this->updatedAt = new \DateTimeImmutable();
     }
 }
 
