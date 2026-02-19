@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Llistat de Productes{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Productes Disponibles</h1>
+
+<div class="row">
+    {% for product in products %}
+        <div class="col-md-4 md-4 my-2">
+            <div class="card h-100 shadow-sm">
+            
+                {% if product.image %}
+                    <img src="{{ product.image }}"
+                         class="card-img-top"
+                         alt="{{ product.name }}">
+                {% endif %}
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title">
+                        {{ product.name }}
+                    </h5>
+
+                    <p class="card-text text-muted small">
+                        Publicat el {{ product.createdAt|date('d/m/Y') }}
+                        per {{ product.owner.email }}
+                    </p>
+
+                    <div class="mt-auto">
+                        <p class="fw-bold">
+                            {{ product.price }} €
+                        </p>
+
+                        <a href="{{ path('app_product_show', { id: product.id }) }}"
+                           class="btn btn-primary w-100">
+                            Veure Producte
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>No hi ha productes disponibles.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
