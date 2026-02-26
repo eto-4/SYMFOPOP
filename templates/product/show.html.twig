@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row g-4">
+
+        {# Imagen #}
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <img 
+                    src="{{ product.image }}" 
+                    alt="{{ product.name }}"
+                    class="img-fluid rounded"
+                >
+            </div>
+        </div>
+
+        {# Información #}
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100 p-4">
+
+                <h1 class="mb-3 fw-semibold">
+                    {{ product.name }}
+                </h1>
+
+                <div class="d-flex align-items-center gap-2 mb-3">
+
+                    {# Avatar autor (placeholder con inicial) #}
+                    <div class="avatar-placeholder">
+                        {{ product.owner.name|first|upper }}
+                    </div>
+
+                    <div class="small text-muted">
+                        Publicat el {{ product.createdAt|date('d/m/Y') }}
+                        <br>
+                        per <strong>{{ product.owner.name }}</strong>
+                    </div>
+                </div>
+
+                <h3 class="text-primary fw-bold mb-4">
+                    {{ product.price|number_format(2, ',', '.') }} €
+                </h3>
+
+                <p class="mb-4">
+                    {{ product.description }}
+                </p>
+
+                <div class="mt-auto">
+                    <a href="{{ path('app_product_index') }}" 
+                       class="btn btn-outline-secondary">
+                        ← Tornar al llistat
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

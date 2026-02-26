@@ -1,0 +1,198 @@
+/* =========================================================
+   Symfopop — CSS personalitzat
+   Bootstrap s'encarrega del layout i la estructura.
+   Aquest fitxer gestiona colors, tipografia i estil visual.
+   ========================================================= */
+
+/* Variables */
+:root {
+    --color-bg:        #faf8f9;
+    --color-surface:   #ffffff;
+    --color-border:    #dee2e6;
+    --color-text:      #212529;
+    --color-muted:     #6c757d;
+    --color-primary:   #0d6efd;
+    --color-success:   #198754;
+    --color-danger:    #dc3545;
+    --color-warning:   #ffc107;
+    --radius:          0.5rem;
+    --shadow-sm:       0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md:       0 4px 12px rgba(0,0,0,0.10);
+}
+
+/* Base */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.925rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.main-content {
+    flex: 1;
+}
+
+/* Navbar brand */
+.navbar-brand {
+    letter-spacing: -0.3px;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* =========================================================
+   Status badges (products)
+   ========================================================= */
+.badge-published { background-color: #d1fae5; color: #065f46; }
+.badge-draft     { background-color: #f3f4f6; color: #374151; }
+.badge-archived  { background-color: #fef3c7; color: #92400e; }
+
+/* =========================================================
+   product cards
+   ========================================================= */
+.product-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+    height: 100%;
+}
+
+.product-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.product-card .card-title a {
+    color: var(--color-text);
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+.product-card .card-title a:hover {
+    color: var(--color-primary);
+}
+
+/* =========================================================
+   Admin sidebar
+   =========================================================
+.admin-sidebar {
+    min-height: calc(100vh - 95vh);
+    background: #1a1d21;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.admin-sidebar .nav-link {
+    color: #9ca3af;
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    transition: background 0.15s, color 0.15s;
+}
+
+.admin-sidebar .nav-link:hover {
+    color: #f9fafb;
+    background: rgba(255,255,255,0.06);
+}
+
+.admin-sidebar .nav-link.active {
+    color: #fff;
+    background: rgba(13, 110, 253, 0.2);
+    border-left: 3px solid var(--color-primary);
+}
+
+.admin-sidebar .nav-section-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+}
+
+=========================================================
+   Admin tables
+   =========================================================
+.admin-table thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+    border-bottom: 2px solid var(--color-border);
+    white-space: nowrap;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #f8f9fa;
+} */
+
+/* =========================================================
+   Auth cards
+   ========================================================= */
+.auth-wrapper {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    background: var(--color-surface);
+    padding: 2rem;
+}
+
+/* =========================================================
+   Utilitats extra
+   ========================================================= */
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-lg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-placeholder-lg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
