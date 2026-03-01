@@ -1,41 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inici de sessió!{% endblock %}
+{% block pageTitle %}Iniciar sessió — SymfoPop{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
-    <form method="post">
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <h1 class="fw-semibold mb-1 text-center">Benvingut de nou</h1>
+        <p class="text-muted text-center small mb-4">Inicia sessió per gestionar els teus productes.</p>
+
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
         {% endif %}
 
-        {% if app.user %}
+        <form method="post">
             <div class="mb-3">
-                Estàs loguejat com a: {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Tancar Sessió</a>
+                <label for="username" class="form-label fw-semibold">Correu electrònic</label>
+                <input type="email"
+                       id="username"
+                       name="_username"
+                       value="{{ last_username }}"
+                       class="form-control"
+                       autocomplete="email"
+                       required
+                       autofocus>
             </div>
-        {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Si us plau inicia sessió</h1>
-        <label for="email">Correu electrònic.</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Contrasenya</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
-        <label>
-            <input type="checkbox" name="_remember_me" checked>
-            Manten-me loguejat.
-        </label>
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
+            <div class="mb-3">
+                <label for="password" class="form-label fw-semibold">Contrasenya</label>
+                <input type="password"
+                       id="password"
+                       name="_password"
+                       class="form-control"
+                       autocomplete="current-password"
+                       required>
             </div>
-        #}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Iniciar sessió
-        </button>
-    </form>
+            <div class="mb-4 d-flex align-items-center gap-2">
+                <input type="checkbox" name="_remember_me" id="remember_me" checked>
+                <label for="remember_me" class="small text-muted">Manten-me connectat</label>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+                Iniciar sessió
+            </button>
+
+            <p class="text-center small text-muted mb-0">
+                Encara no tens compte?
+                <a href="{{ path('app_register') }}">Registra't</a>
+            </p>
+        </form>
+
+    </div>
+</div>
+
 {% endblock %}
