@@ -37,6 +37,7 @@ final class ProductController extends AbstractController
      * Detall d'un producte.
      * Symfony resol automàticament el Product pel {id} (ParamConverter).
      * Si no existeix, llança un 404 automàticament.
+     * Si el parametre de la url NO es un digit, no entra com {id}.
      */
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Product $product): Response
