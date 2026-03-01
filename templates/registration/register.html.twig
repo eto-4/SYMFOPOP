@@ -1,20 +1,56 @@
 {% extends 'base.html.twig' %}
 
+{% block pageTitle %}Registre — SymfoPop{% endblock %}
 {% block title %}Registre{% endblock %}
 
 {% block body %}
-    <h1>Registre</h1>
 
-    {{ form_errors(registrationForm) }}
+<div class="auth-wrapper">
+    <div class="auth-card">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <h1 class="fw-semibold mb-1 text-center">Crea el teu compte</h1>
+        <p class="text-muted text-center small mb-4">Uneix-te a SymfoPop i publica els teus productes.</p>
 
-        <button type="submit" class="btn">Registrar-me</button>
-    {{ form_end(registrationForm) }}
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm, { attr: { novalidate: 'novalidate' } }) }}
+
+            <div class="mb-3">
+                {{ form_label(registrationForm.name, 'Nom', { label_attr: { class: 'form-label fw-semibold' } }) }}
+                {{ form_widget(registrationForm.name, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(registrationForm.name) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(registrationForm.email, 'Correu electrònic', { label_attr: { class: 'form-label fw-semibold' } }) }}
+                {{ form_widget(registrationForm.email, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(registrationForm.plainPassword, 'Contrasenya', { label_attr: { class: 'form-label fw-semibold' } }) }}
+                {{ form_widget(registrationForm.plainPassword, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <div class="mb-4 d-flex align-items-center gap-2">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms, 'Accepto els termes i condicions', { label_attr: { class: 'small text-muted' } }) }}
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+                Crear compte
+            </button>
+
+            <p class="text-center small text-muted mb-0">
+                Ja tens compte?
+                <a href="{{ path('app_login') }}">Inicia sessió</a>
+            </p>
+
+        {{ form_end(registrationForm) }}
+
+    </div>
+</div>
+
 {% endblock %}
