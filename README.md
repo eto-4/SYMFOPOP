@@ -165,7 +165,7 @@ symfopop/
 
 ## Comptes de prova
 
-Després de carregar les fixtures, pots entrar amb qualsevol dels usuaris generats. Consulta els emails a la base de dades o usa el Symfony Profiler. La contrasenya de tots és:
+Després de carregar les fixtures, pots entrar amb qualsevol dels usuaris generats. Consulta els emails a la base de dades o fes servir el Symfony Profiler. La contrasenya de tots és:
 
 ```
 password
