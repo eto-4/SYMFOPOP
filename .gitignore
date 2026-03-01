@@ -9,7 +9,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/.env*los q
+.env*
 
 ###> phpunit/phpunit ###
 /phpunit.xml
