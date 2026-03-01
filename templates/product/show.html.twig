@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block pageTitle %}{{ product.name }} — SymfoPop{% endblock %}
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
@@ -7,35 +8,36 @@
 <div class="container">
     <div class="row g-4">
 
-        {# Imagen #}
+        {# Imatge #}
         <div class="col-lg-6">
-            <div class="card border-0 shadow-sm h-100">
-                <img 
-                    src="{{ product.image }}" 
-                    alt="{{ product.name }}"
-                    class="img-fluid rounded"
-                >
+            <div class="card border-0 shadow-sm">
+                {% if product.image %}
+                    <img src="{{ product.image }}"
+                         alt="{{ product.name }}"
+                         class="img-fluid rounded"
+                         style="max-height: 420px; width: 100%; object-fit: cover;">
+                {% else %}
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                         style="height: 420px;">
+                        <span class="text-muted">Sense imatge</span>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
-        {# Información #}
+        {# Informació #}
         <div class="col-lg-6">
-            <div class="card border-0 shadow-sm h-100 p-4">
+            <div class="card border-0 shadow-sm h-100 p-4 d-flex flex-column">
 
-                <h1 class="mb-3 fw-semibold">
-                    {{ product.name }}
-                </h1>
+                <h1 class="mb-3 fw-semibold">{{ product.name }}</h1>
 
+                {# Autor #}
                 <div class="d-flex align-items-center gap-2 mb-3">
-
-                    {# Avatar autor (placeholder con inicial) #}
                     <div class="avatar-placeholder">
                         {{ product.owner.name|first|upper }}
                     </div>
-
                     <div class="small text-muted">
-                        Publicat el {{ product.createdAt|date('d/m/Y') }}
-                        <br>
+                        Publicat el {{ product.createdAt|date('d/m/Y') }}<br>
                         per <strong>{{ product.owner.name }}</strong>
                     </div>
                 </div>
@@ -44,12 +46,29 @@
                     {{ product.price|number_format(2, ',', '.') }} €
                 </h3>
 
-                <p class="mb-4">
-                    {{ product.description }}
-                </p>
+                <p class="mb-4">{{ product.description }}</p>
+
+                {# Botons d'acció — només si l'usuari és el propietari #}
+                {% if app.user and app.user == product.owner %}
+                    <div class="d-flex gap-2 mb-3">
+                        <a href="{{ path('app_product_edit', { id: product.id }) }}"
+                           class="btn btn-outline-secondary">
+                            ✏️ Editar
+                        </a>
+                        <form method="post"
+                              action="{{ path('app_product_delete', { id: product.id }) }}"
+                              onsubmit="return confirm('Segur que vols eliminar aquest producte?');">
+                            <input type="hidden" name="_token"
+                                   value="{{ csrf_token('delete' ~ product.id) }}">
+                            <button class="btn btn-outline-danger">
+                                🗑️ Eliminar
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
 
                 <div class="mt-auto">
-                    <a href="{{ path('app_product_index') }}" 
+                    <a href="{{ path('app_product_index') }}"
                        class="btn btn-outline-secondary">
                         ← Tornar al llistat
                     </a>
