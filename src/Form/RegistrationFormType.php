@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
 
 /**
  * Formulari de registre de nous usuaris.
@@ -61,6 +62,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Correu electrònic',
                 'constraints' => [
                     new NotBlank(message: 'Introdueix el teu email.'),
+                    new Email(message: 'El format del correu electrònic no és vàlid.'),
                 ],
             ])
 
@@ -87,7 +89,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new NotBlank(message: 'Introdueix una contrasenya.'),
                     new Length(
-                        min: 6,
+                        min: 8,
                         minMessage: 'La contrasenya ha de tenir mínim {{ limit }} caràcters.',
                         // 4096 és el límit màxim de Symfony per prevenir atacs de DoS
                         // mitjançant contrasenyes extremadament llargues

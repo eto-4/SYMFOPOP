@@ -3,52 +3,99 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
         <title>{% block pageTitle %} SymfoPop {% endblock %}</title>
-    
+
         {# Bootstrap 5 CSS #}
-        <link rel="stylesheet" 
+        <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('styles/css/app.css') }}">
     </head>
     <body class="d-flex flex-column min-vh-100">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a href="{{ path('app_home') }}" class="navbar-brand">SymfoPop</a>
-    
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+                {# Logo / Brand #}
+                <a href="{{ path('app_home') }}" class="navbar-brand fw-bold">SymfoPop</a>
+
+                {# Botó hamburguesa per a mòbil #}
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+
+                    {# Enllaços principals — esquerra #}
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="{{ path('app_product_index') }}" class="nav-link">Home</a>
+                            <a href="{{ path('app_product_index') }}" class="nav-link">
+                                Productes
+                            </a>
                         </li>
-    
+                    </ul>
+
+                    {# Accions d'usuari — dreta #}
+                    <ul class="navbar-nav ms-auto align-items-center gap-2">
+
                         {% if app.user %}
+
+                            {# Botó ràpid de nou producte #}
                             <li class="nav-item">
-                                <a class="nav-link">Hola, {{ app.user.userIdentifier }}</a>
+                                <a href="{{ path('app_product_new') }}"
+                                   class="btn btn-primary btn-sm">
+                                    + Nou producte
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ path('app_my_products') }}" class="nav-link">Els meus productes</a>
+
+                            {# Dropdown d'usuari amb avatar #}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    {# Avatar amb la inicial del nom #}
+                                    <div class="avatar-placeholder">
+                                        {{ app.user.name|first|upper }}
+                                    </div>
+                                    {{ app.user.name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a href="{{ path('app_my_products') }}"
+                                           class="dropdown-item">
+                                            📦 Els meus productes
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a href="{{ logout_path() }}"
+                                           class="dropdown-item text-danger">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ path('app_product_new') }}" class="nav-link">Nou producte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ logout_path() }}" class="nav-link">Logout</a>
-                            </li>
+
                         {% else %}
+
                             <li class="nav-item">
-                                <a href="{{ path('app_login') }}" class="nav-link">Login</a>
+                                <a href="{{ path('app_login') }}" class="nav-link">
+                                    Login
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ path('app_register') }}" class="nav-link">Register</a>
+                                <a href="{{ path('app_register') }}"
+                                   class="btn btn-outline-light btn-sm">
+                                    Registre
+                                </a>
                             </li>
+
                         {% endif %}
+
                     </ul>
                 </div>
             </div>
         </nav>
-        

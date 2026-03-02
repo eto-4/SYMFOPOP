@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block pageTitle %}Registre — SymfoPop{% endblock %}
-{% block title %}Registre{% endblock %}
 
 {% block body %}
 
@@ -15,29 +14,10 @@
 
         {{ form_start(registrationForm, { attr: { novalidate: 'novalidate' } }) }}
 
-            <div class="mb-3">
-                {{ form_label(registrationForm.name, 'Nom', { label_attr: { class: 'form-label fw-semibold' } }) }}
-                {{ form_widget(registrationForm.name, { attr: { class: 'form-control' } }) }}
-                {{ form_errors(registrationForm.name) }}
-            </div>
-
-            <div class="mb-3">
-                {{ form_label(registrationForm.email, 'Correu electrònic', { label_attr: { class: 'form-label fw-semibold' } }) }}
-                {{ form_widget(registrationForm.email, { attr: { class: 'form-control' } }) }}
-                {{ form_errors(registrationForm.email) }}
-            </div>
-
-            <div class="mb-3">
-                {{ form_label(registrationForm.plainPassword, 'Contrasenya', { label_attr: { class: 'form-label fw-semibold' } }) }}
-                {{ form_widget(registrationForm.plainPassword, { attr: { class: 'form-control' } }) }}
-                {{ form_errors(registrationForm.plainPassword) }}
-            </div>
-
-            <div class="mb-4 d-flex align-items-center gap-2">
-                {{ form_widget(registrationForm.agreeTerms) }}
-                {{ form_label(registrationForm.agreeTerms, 'Accepto els termes i condicions', { label_attr: { class: 'small text-muted' } }) }}
-                {{ form_errors(registrationForm.agreeTerms) }}
-            </div>
+            {{ form_row(registrationForm.name, { label: 'Nom', label_attr: { class: 'fw-semibold' } }) }}
+            {{ form_row(registrationForm.email, { label: 'Correu electrònic', label_attr: { class: 'fw-semibold' } }) }}
+            {{ form_row(registrationForm.plainPassword, { label: 'Contrasenya', label_attr: { class: 'fw-semibold' } }) }}
+            {{ form_row(registrationForm.agreeTerms, { label: 'Accepto els termes i condicions', label_attr: { class: 'small text-muted' } }) }}
 
             <button type="submit" class="btn btn-primary w-100 mb-3">
                 Crear compte
